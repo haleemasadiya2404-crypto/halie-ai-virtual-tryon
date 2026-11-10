@@ -1,4 +1,4 @@
-import Hero from "../components/Hero";
+import Hero from "../components/hero";
 import ProductGrid from "../components/ProductGrid";
 import Footer from "../components/Footer";
 
