@@ -1,13 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar";
-
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Shop from "./pages/Shop";
+import Shop from "./pages/shop";
 import Collections from "./pages/Collections";
 import TryOn from "./pages/TryOn";
 import Contact from "./pages/Contact";
-import Wishlist from "./pages/Wishlist";
-import Cart from "./pages/Cart";
+import Wishlist from "./pages/wishlist";
+import Cart from "./pages/cart";
 import Checkout from "./pages/checkout";
 import OrderConfirmed from "./pages/OrderConfirmed";
 import Login from "./pages/login";

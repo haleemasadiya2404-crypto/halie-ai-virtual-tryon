@@ -1,4 +1,6 @@
 
+/* global require, process */
+
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
@@ -124,6 +126,8 @@ app.post(
 );
 
 app.use((error, req, res, next) => {
+  void next;
+
   if (error instanceof multer.MulterError) {
     return res.status(400).json({
       error:
@@ -140,8 +144,8 @@ app.use((error, req, res, next) => {
   });
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`HALIÉ backend running on http://localhost:${PORT}`);
+  console.log(`HALIÉ backend running on port ${PORT}`);
 });

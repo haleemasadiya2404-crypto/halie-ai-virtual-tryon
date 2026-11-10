@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function OrderConfirmed() {
   const navigate = useNavigate();
-  const [order, setOrder] = useState(null);
 
-  useEffect(() => {
-    const savedOrder =
-      JSON.parse(localStorage.getItem("halieOrder")) || null;
-
-    setOrder(savedOrder);
-  }, []);
+  const [order] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("halieOrder")) || null;
+    } catch {
+      return null;
+    }
+  });
 
   const deliveryDate = new Date();
   deliveryDate.setDate(deliveryDate.getDate() + 5);
@@ -24,9 +25,7 @@ function OrderConfirmed() {
   return (
     <section className="order-confirmed-page">
       <div className="order-confirmed-box">
-
         <div className="success-icon">✓</div>
-
         <h1>Order Confirmed!</h1>
 
         <p>
@@ -37,34 +36,23 @@ function OrderConfirmed() {
           Your order has been placed successfully.
         </p>
 
-        {/* DELIVERY DATE */}
         <div className="delivery-info">
           <h2>📦 Estimated Delivery</h2>
-
-          <div className="delivery-date">
-            {formattedDate}
-          </div>
-
-          <p>
-            Your HALIÉ order is expected to arrive by this date.
-          </p>
+          <div className="delivery-date">{formattedDate}</div>
+          <p>Your HALIÉ order is expected to arrive by this date.</p>
         </div>
 
-        {/* DELIVERY ADDRESS */}
         <div className="delivery-address">
           <h2>📍 Delivering To</h2>
 
           {order?.customer ? (
             <>
               <strong>{order.customer.name}</strong>
-
               <p>{order.customer.address}</p>
-
               <p>
                 {order.customer.city}, {order.customer.state} -{" "}
                 {order.customer.pincode}
               </p>
-
               <p>📞 {order.customer.phone}</p>
             </>
           ) : (
@@ -72,7 +60,6 @@ function OrderConfirmed() {
           )}
         </div>
 
-        {/* ORDER SUMMARY */}
         {order && (
           <div className="confirmed-order-summary">
             <h2>🛍️ Order Summary</h2>
@@ -81,24 +68,14 @@ function OrderConfirmed() {
               const price = Number(
                 String(item.price).replace(/[₹,]/g, "")
               );
-
               const quantity = item.quantity || 1;
 
               return (
-                <div
-                  className="confirmed-order-item"
-                  key={item.id}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                  />
-
+                <div className="confirmed-order-item" key={item.id}>
+                  <img src={item.image} alt={item.name} />
                   <div>
                     <h3>{item.name}</h3>
-
                     <p>Quantity: {quantity}</p>
-
                     <p>
                       ₹{(price * quantity).toLocaleString("en-IN")}
                     </p>
@@ -115,9 +92,7 @@ function OrderConfirmed() {
 
               <p>
                 Delivery:{" "}
-                {order.delivery === 0
-                  ? "FREE"
-                  : `₹${order.delivery}`}
+                {order.delivery === 0 ? "FREE" : `₹${order.delivery}`}
               </p>
 
               <h3>
@@ -128,13 +103,11 @@ function OrderConfirmed() {
           </div>
         )}
 
-        {/* ORDER TRACKING */}
         <div className="order-tracking">
           <h2>🚚 Where is my order?</h2>
 
           <div className="tracking-step active">
             <span>✓</span>
-
             <div>
               <strong>Order Confirmed</strong>
               <p>Your order has been received.</p>
@@ -143,7 +116,6 @@ function OrderConfirmed() {
 
           <div className="tracking-step">
             <span>2</span>
-
             <div>
               <strong>Packed</strong>
               <p>Waiting to be packed.</p>
@@ -152,7 +124,6 @@ function OrderConfirmed() {
 
           <div className="tracking-step">
             <span>3</span>
-
             <div>
               <strong>Shipped</strong>
               <p>Your order will be shipped soon.</p>
@@ -161,7 +132,6 @@ function OrderConfirmed() {
 
           <div className="tracking-step">
             <span>4</span>
-
             <div>
               <strong>Out for Delivery</strong>
               <p>Your order will be on its way to you.</p>
@@ -170,7 +140,6 @@ function OrderConfirmed() {
 
           <div className="tracking-step">
             <span>5</span>
-
             <div>
               <strong>Delivered</strong>
               <p>Enjoy your HALIÉ outfit! ✨</p>
@@ -184,7 +153,6 @@ function OrderConfirmed() {
         >
           Continue Shopping 🛍️
         </button>
-
       </div>
     </section>
   );
