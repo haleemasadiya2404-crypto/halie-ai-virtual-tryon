@@ -1,6 +1,8 @@
-import Hero from "../components/hero.jsx";
-import ProductGrid from "../components/productgrid.jsx";
-import Footer from "../components/footer.jsx";
+
+import Hero from "../components/Hero.jsx";
+import ProductGrid from "../components/ProductGrid.jsx";
+import Footer from "../components/Footer.jsx";
+
 function Home() {
   return (
     <>
