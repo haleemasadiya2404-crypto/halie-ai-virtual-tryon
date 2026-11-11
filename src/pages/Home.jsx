@@ -1,5 +1,5 @@
 
-import Hero from "../components/Hero.jsx";
+import Hero from "../components/hero.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
 import Footer from "../components/Footer.jsx";
 
