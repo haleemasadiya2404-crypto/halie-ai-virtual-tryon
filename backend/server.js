@@ -80,16 +80,16 @@ app.post(
       const { Client, handle_file } = await import("@gradio/client");
       const ai = await Client.connect("monk7/vtryon-a");
 
-      const prediction = await ai.predict("/tryon", {
-  person_image: handle_file(person.buffer),
-  garment_image: handle_file(garment.buffer),
+      const prediction = await ai.predict("/tryon", [
+  handle_file(person.buffer),
+  handle_file(garment.buffer),
   category,
-  garment_is_worn: garmentIsWorn,
-  request_hash: "",
-  steps: 30,
-  scale: 2.5,
-  seed: 42,
-});
+  garmentIsWorn,
+  "",
+  30,
+  2.5,
+  42,
+]);
 
       console.log("AI reply:", JSON.stringify(prediction.data, null, 2));
 
